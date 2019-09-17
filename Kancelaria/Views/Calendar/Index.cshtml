@@ -1,0 +1,196 @@
+﻿@model Kancelaria.Models.Calendar.Calendar
+
+@{
+    ViewData["Title"] = "Kalendarz";
+    object boo;
+    if (TempData != null)
+    {
+        if (TempData.TryGetValue("EventCreated", out boo))
+        {
+            ViewData["Message"] = "Utworzono nowe zadanie.";
+            @await Html.PartialAsync("Message");
+        }
+        if (TempData.TryGetValue("EventDeleted", out boo))
+        {
+            ViewData["Message"] = "Zadanie zostało usunięte.";
+            @await Html.PartialAsync("Message");
+        }
+        if (TempData.TryGetValue("EventUpdated", out boo))
+        {
+            ViewData["Message"] = "Zadanie zostało zaktualizowane.";
+            @await Html.PartialAsync("Message");
+        }
+    }
+}
+<link href="~/css/Calendar-css.css" rel="stylesheet" />
+<script src="~/js/calendar.js"></script>
+<h2>Kalendarz</h2>
+
+<form asp-action="Calendar">
+        
+
+    <div id="Calendar" class="row">
+        <h2>
+            @Model.year @Model.GetMonth(Model.month)
+        </h2>
+     
+        <div id="left-button" onclick="previousMonth();" class="button-month">&#9664;</div>
+        <div id="right-button" onclick="nextMonth();" class="button-month">&#9658;</div>
+        <div id="calendar-days" class="col-lg-6" style="width:auto">
+            <table>
+                <tr class="days-label">
+                    <td>
+                        PON
+                    </td>
+                    <td>
+                        WT
+                    </td>
+                    <td>
+                        ŚR
+                    </td>
+                    <td>
+                        CZW
+                    </td>
+                    <td>
+                        PT
+                    </td>
+                    <td>
+                        SB
+                    </td>
+                    <td>
+                        ND
+                    </td>
+                </tr>
+                <tr class="cells">
+                    <td id="d1"></td>
+                    <td id="d2"></td>
+                    <td id="d3"></td>
+                    <td id="d4"></td>
+                    <td id="d5"></td>
+                    <td id="d6" class="saturday"></td>
+                    <td id="d7" class="sunday"></td>
+
+                </tr>
+                <tr class="cells">
+                    <td id="d8"></td>
+                    <td id="d9"></td>
+                    <td id="d10"></td>
+                    <td id="d11"></td>
+                    <td id="d12"></td>
+                    <td id="d13" class="saturday"></td>
+                    <td id="d14" class="sunday"></td>
+
+                </tr>
+                <tr class="cells">
+                    <td id="d15"></td>
+                    <td id="d16"></td>
+                    <td id="d17"></td>
+                    <td id="d18"></td>
+                    <td id="d19"></td>
+                    <td id="d20" class="saturday"></td>
+                    <td id="d21" class="sunday"></td>
+                </tr>
+                <tr class="cells">
+                    <td id="d22"></td>
+                    <td id="d23"></td>
+                    <td id="d24"></td>
+                    <td id="d25"></td>
+                    <td id="d26"></td>
+                    <td id="d27" class="saturday"></td>
+                    <td id="d28" class="sunday"></td>
+
+                </tr>
+                <tr class="cells">
+                    <td id="d29"></td>
+                    <td id="d30"></td>
+                    <td id="d31"></td>
+                    <td id="d32"></td>
+                    <td id="d33"></td>
+                    <td id="d34" class="saturday"></td>
+                    <td id="d35" class="sunday"></td>
+                </tr>
+                <tr class="cells">
+                    <td id="d36"></td>
+                    <td id="d37"></td>
+                    <td id="d38"></td>
+                    <td id="d39"></td>
+                    <td id="d40"></td>
+                    <td id="d41" class="saturday"></td>
+                    <td id="d42" class="sunday"></td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="col-lg-5" id="div-events" >
+            <h2 >Zadania</h2>
+            <div id="show-event" style="display:none; ">
+                <div onclick="createEve()" class="btn btn-default btn-event" style="width:100%" >Dodaj zadanie</div>
+                <table id="event-title-table" class="event-show">
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
+            <h2 id="title">Terminarz</h2>
+
+
+
+
+            <table class="timetable">
+                @{
+                    var days = DateTime.DaysInMonth(Model.year, Model.month);
+                    var curDay = Model.GetCurrentMonthDay();
+                }
+
+                @for (int i = 0; i < days; i++)
+            {
+                    <tr>
+                        <td class="timetable-cell-1">@(i + 1)</td>
+                        <td class="timetable-cell-2" id="@(i+1)-a">
+                            @for (int j = 0; j < Model.events.Count; j++)
+                            {
+                                if (Model.events[j].Day == (i + 1))
+                                {
+                                    <div>
+
+                                        <img src="~/images/alarm_icon.png" /> @string.Format("{0}:{1:00}", Model.events[j].Hour, Model.events[j].Minute)  <strong>&nbsp &nbsp &#8594; &nbsp &nbsp        @Model.events[j].eventName </strong>:&nbsp  @Model.events[j].characteristics
+
+                                    </div>
+                                }
+                            }
+
+                        </td>
+
+
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+
+    <script>
+        function addCurDayStyle() {
+            var element = document.getElementById(@curDay+"-a");
+            element.style.borderWidth = "thick";
+            element.style.borderColor = "#ff5252";
+        }
+        addCurDayStyle();
+    </script>
+
+</form>
+
+
+
+<div class="resizable" id="event" style="display:none;">
+    @await Html.PartialAsync("Event")
+</div>
+
+@await Html.PartialAsync("CalendarScript")
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

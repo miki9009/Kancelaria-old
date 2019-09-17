@@ -1,0 +1,164 @@
+﻿@model Kancelaria.Models.Case
+@using Kancelaria.Models.Cases
+
+<div class="resizable kancelaria-div" id="participants">
+    <h2 class="title" style="text-align:center">Dodatkowi uczestnicy</h2>
+
+    @for (int i = 0; i < Model.participants.Count; i++)
+    {
+        @if (Model.participants[i].Name != null && Model.participants[i].Surname != null)
+        {
+            <h4 class="title" style="text-align:center">@string.Format("{0} {1}", Model.participants[i].Name, Model.participants[i].Surname)</h4>
+        }
+        else
+        {
+            <h4 class="title" style="text-align:center">Uczestnik @(i + 1)</h4>
+        }
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <input type="hidden" asp-for="participants[i].ID" />
+                    <input type="hidden" asp-for="participants[i].CaseID" />
+                    <!--Typ-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Type" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="participants[i].Type" class="form-control">
+                                <option value="0"> </option>
+                                <option value="1">wnioskodawca</option>
+                                <option value="2">uczestnik</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Imię-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Name" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].Name" class="form-control" />
+                            <span asp-validation-for="participants[i].Name" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nazwisko-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Surname" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].Surname" class="form-control" />
+                            <span asp-validation-for="participants[i].Surname" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Miejscowość-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Town" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].Town" class="form-control" />
+                            <span asp-validation-for="participants[i].Town" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Kod pocztowy-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].PostCode" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].PostCode" class="form-control" />
+                            <span asp-validation-for="participants[i].PostCode" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Ulica-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Street" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].Street" class="form-control" />
+                            <span asp-validation-for="participants[i].Street" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nr Budynku-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].BuildingNum" class="col-md-6 control-label"></label>
+                        <div class="col-md-4">
+                            <input asp-for="participants[i].BuildingNum" class="form-control" />
+                            <span asp-validation-for="participants[i].BuildingNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Województwo-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].Voivodship" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="participants[i].Voivodship" class="form-control">
+                                @for (int v = 0; v < Basic.voivodshipList.Count; v++)
+                                {
+                                    <option value="@v">@Basic.voivodshipList[v]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <!--Powiat-->
+                    <div class="form-group">
+                        <label asp-for="participants[i].County" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].County" class="form-control" />
+                            <span asp-validation-for="participants[i].County" class="text-danger" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                    <div class="form-group">
+                        <label asp-for="participants[i].NIP" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].NIP" class="form-control" />
+                            <span asp-validation-for="participants[i].NIP" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="participants[i].Pesel" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].Pesel" class="form-control" />
+                            <span asp-validation-for="participants[i].Pesel" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="participants[i].IdentityNum" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].IdentityNum" class="form-control" />
+                            <span asp-validation-for="participants[i].IdentityNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="participants[i].mail" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].mail" class="form-control" />
+                            <span asp-validation-for="participants[i].mail" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="participants[i].phone" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].phone" class="form-control" />
+                            <span asp-validation-for="participants[i].phone" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="participants[i].phoneMobile" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="participants[i].phoneMobile" class="form-control" />
+                            <span asp-validation-for="participants[i].phoneMobile" class="text-danger" />
+                        </div>
+                    </div>
+                    <div id="remove-participant-button" style=" margin:auto;">
+                       <!----> <a asp-controller="Participants" asp-action="RemoveParticipant" asp-route-id=@Model.participants[i].ID asp-route-id2=@Model.ID class="button-kancelaria" name="Participants" >Usuń uczestnika</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div id="add-participant-button" style="width:17.5%; margin:auto;">
+        <input id="saveForm" type="submit" value="Dodaj uczestnika" onclick="changeOverlapInt('participants')" class="button-kancelaria"/>
+       <!-- <a asp-controller="Participants" asp-action="AddParticipant" asp-route-id=@Model.ID asp-route-redirectUrl="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")" onclick="changeOverlapInt('participants')" class="btn btn-default" style="width:200px; height:40px;">Dodaj uczestnika</a>-->
+    </div>
+</div>

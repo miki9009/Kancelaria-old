@@ -1,0 +1,180 @@
+﻿@model Kancelaria.Models.Calendar.Calendar
+@using Microsoft.Extensions.WebEncoders;
+@using System.Text.Encodings.Web;
+
+<script>
+
+    var selectedDayVal = 0;
+    var first_day = 0;
+    var events = [];
+    var day_index = 0;
+    var index_event;
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        setCells();
+    });
+
+    //Tworzy dni
+    function setCells() {
+        first_day = @Model.GetFirstDayIndex(Model.year, Model.month);
+        var last_day = @Model.GetLastDayIndex(Model.year, Model.month, Model.firstDayIndex);
+        for (var i = 1; i < 43; i++) {
+            if (i < first_day || i > last_day - 1){
+                document.getElementById('d'+i).style.backgroundColor = '#d8d4ca';
+            }
+            else{
+                var element = document.getElementById('d'+i)
+                element.innerHTML = i-first_day+1;
+                element.addEventListener("click", selectDay);
+            }
+        }
+        if ((@Model.month == @DateTime.Now.Month) && (@Model.year == @DateTime.Now.Year)){
+            var current_day = @Model.GetCurrentMonthDay();
+            var sum = current_day + first_day - 1;
+            document.getElementById('d' + sum).style.borderWidth = "thick";
+            document.getElementById('d' + sum).style.borderColor = "red";
+
+        }
+    }
+
+    //Zaznacza dzien i przypisuje wartosc globalna day_index zgodnie z kliknietym dniem
+    function selectDay() {
+        if (selectedDayVal != 0){
+            if (document.getElementById(selectedDayVal).style.backgroundColor != "rgb(0, 38, 74)"){
+                document.getElementById(selectedDayVal).style.backgroundColor = "";
+                document.getElementById(selectedDayVal).style.color = "black";
+            }
+        }
+        if (document.getElementById(this.id).style.backgroundColor != "rgb(0, 38, 74)"){
+            document.getElementById(this.id).style.backgroundColor = "#004280";
+            document.getElementById(this.id).style.color = "white";
+
+
+        }
+        selectedDayVal = this.id;
+        day_index = parseInt(selectedDayVal.substring(1)) - first_day + 1;
+        openEventDescription(this.id);
+    }
+
+
+    //KLIKNIECIE KOLEJNEGO MIESIACA NA KALENDARZU
+    function nextMonth(){
+        window.location.href = "/Calendar/Index/?id=@(Model.month + 1)&year=@Model.year";
+    }
+
+    //KLIKNIECIE POPRZEDNIEGO MIESIACA NA KALENDARZU
+    function previousMonth(){
+        window.location.href = "/Calendar/Index/?id=@(Model.month - 1 == 0 ? -1 : Model.month - 1)&year=@Model.year";
+    }
+
+    //ZAMYKANIE OTWARTEGO EVENTU
+    function CloseEve(){
+        document.getElementById('event').style.display = "none";
+    }
+
+    //Tworzy zdarzenia dla konkretnego dnia
+    function openEventDescription(parameter){
+        document.getElementById('show-event').style.display = 'block';
+        var index =  parseInt(parameter.substring(1, 10)) - first_day + 1;
+        $("#event-title-table tr").remove();
+        for(var i = 0; i < events.length; i++){
+
+            if (index == events[i].event_day){
+
+                var table = document.getElementById("event-title-table");
+                var row = document.createElement("tr");
+                table.appendChild(row);
+                var column = row.insertCell(-1);
+                column.innerHTML = events[i].event_name;                                
+                column.addEventListener("click", editEvent);                            //Dodanie funkcji onclick o nazwie editEvent
+                column.id = events[i].event_time;                                       //nadanie elementowi id
+                var p = document.createElement("P");                                    //stworzenie nowego elementu typu "P"              
+                p.innerHTML = events[i].event_time;                                     //tekst dla elementu p
+                column.appendChild(p);                                                  //doczepienie childa do parenta
+            }
+        }
+    }
+
+    //TWORZENIE EVENTU
+    function createEve(){
+       
+        var day = day_index < 10 ? "0"+day_index : day_index;
+        document.getElementById('event').style.display = 'block';
+        document.getElementById('event-date-input').value = "@Model.year.@(Model.month < 10 ? "0"+Model.month.ToString() : Model.month.ToString())"+"."+day;
+        document.getElementById('event-name').value = "";
+        document.getElementById('event-description').value = "";
+        document.getElementById('event-time').value = "";
+        document.getElementById('event-id').value = 0;
+        document.getElementById('submit-button').value = "Dodaj";
+        document.getElementById('delete-button').style.display = "none";
+    }
+
+    //Edycja Eventu
+    function editEvent(){ 
+        var element = document.getElementById('event');
+        var day = day_index < 10 ? "0"+day_index : day_index;
+        element.style.display = 'block';
+        document.getElementById('event-date-input').value = "@Model.year-@(Model.month < 10 ? "0"+Model.month.ToString() : Model.month.ToString())"+"-"+day;
+
+        var index =  day_index;
+        for(var i = 0; i < events.length; i++){
+            if (index == events[i].event_day && this.id == events[i].event_time){
+                document.getElementById('event-name').value = events[i].event_name;
+                document.getElementById('event-description').value = events[i].event_description;
+                document.getElementById('event-time').value = events[i].event_time;
+                document.getElementById('event-id').value = events[i].event_id;
+                document.getElementById('submit-button').value = "Edytuj";
+                document.getElementById('delete-button').style.display = "block";
+            }
+        }
+    }
+
+    function elementChangeColor(parameter){
+        document.getElementById(parameter).style.backgroundColor = "rgb(0, 38, 74)";
+        document.getElementById(parameter).style.color = "white";
+    }
+
+    function deleteEvent(){
+        var url = "/Calendar/Delete/?id=" + document.getElementById('event-id').value;
+        window.location.href = url;
+        
+    }
+
+    
+
+
+</script>
+<!--CSharp-->
+
+@if (Model.events != null)
+{
+    foreach (var calendar in Model.events)
+    {
+        if (Model.year == calendar.year && Model.month == calendar.month)
+        {
+            <script>
+                var day = @(calendar.day + Model.firstDayIndex-1);
+                elementChangeColor('d'+day);
+            </script>
+        }
+
+    }
+}
+
+
+
+@{
+    var encoder = JavaScriptEncoder.Create();
+}
+
+@foreach (var ev in Model.events)
+{
+    <script>
+        var obj = {event_name : "@encoder.Encode(ev.eventName)", event_day : "@ev.day", event_description : "@encoder.Encode(ev.characteristics == null?" ": ev.characteristics)",
+        event_time : "@ev.eventTime", event_id : "@ev.ID"};
+        events.push(obj);
+    </script>
+}
+
+
+

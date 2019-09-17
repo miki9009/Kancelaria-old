@@ -1,0 +1,131 @@
+﻿@model Kancelaria.Models.Notification
+@{
+    ViewData["Title"] = "Home Page";
+
+    object boo;
+    if (TempData != null && TempData.TryGetValue("LoggedOut", out boo))
+    {
+        ViewData["Message"] = "Wylogowano.";
+        @await Html.PartialAsync("Message");
+
+    }
+
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" style="margin-top:50px;">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/kancelaria_logo.png" alt="Kancelaria" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Dowiedz się więcej.
+                    <a class="btn btn-default" href="">
+                        Sprawdź
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/kancelaria_logo.png" alt="Kancelaria" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Dowiedz się więcej.
+                    <a class="btn btn-default" href="">
+                        Sprawdź
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/kancelaria_logo.png" alt="Kancelaria" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Dowiedz się więcej.
+                    <a class="btn btn-default" href="">
+                        Sprawdź
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/kancelaria_logo.png" alt="Kancelaria" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Dowiedz się więcej.
+                    <a class="btn btn-default" href="">
+                        Sprawdź
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Poprzedni</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Następny</span>
+    </a>
+</div>
+<h2 class="title-h">Ostatnie wiadomości</h2>
+<div class="container" id="posts">
+   
+</div>
+<script>
+    var postsExist = false;
+</script>
+
+
+
+@{
+    object obj;
+    string[] posts = null;
+    if (ViewData.TryGetValue("Posts", out obj))
+    {
+        posts = (string[])obj;
+    }
+
+    if (posts != null)
+    {
+        <script>
+            var files = [];
+            postsExist = true;
+        </script>
+        for (int i = 0; i < posts.Length; i++)
+        {
+            <script>
+                 files[@i] = '@posts[i]';
+            </script>
+        }
+
+    }
+}
+<script src="~/js/site.js"></script>
+<script>
+    if (postsExist) {
+        for (var i = 0; i < files.length; i++) {
+            appendPartial('posts', 'html', files[i]);
+        }
+
+    }
+    function appendPartial(parentID, folder, partialView) {
+        console.log('xhr start');
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', '/' + folder + '/' + partialView, true);
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById(parentID).innerHTML += '<div class="row post">'+this.responseText+'</div>';
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+

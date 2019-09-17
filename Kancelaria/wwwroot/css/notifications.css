@@ -1,0 +1,42 @@
+﻿#left-menu {
+    border-style: inset;
+    border-color: darkgray;
+    border-width: thin;
+    width:250px;
+    background-color:lightgray;
+    overflow-y:scroll;
+}
+    #left-menu label {
+        font-size: 95%;
+    }
+
+#left-menu li {
+    text-decoration: none;
+    list-style: none;
+    margin-left: -40px;
+    padding-left: 0;
+    text-align: left;
+    border-color: darkgray;
+    border-bottom:inset;
+    border-width:thin;
+    padding: 5px 10px 5px 10px;
+    background-color: #3f3f3f;
+    color: white;
+}
+
+    #left-menu li:hover {
+        background-color: dimgray;
+        cursor:pointer;
+    }
+
+#left-menu ul li p {
+    font-size: 80%;
+    color: red;
+}
+
+#notification-content {
+    box-shadow: inset 0px 0px 16px 8px rgba(0,0,0,0.2),inset -0px 0px 20px 8px rgba(0,0,0,0.19);
+    height: 780px;
+    margin-top: -70px;
+    overflow-y: scroll;
+}

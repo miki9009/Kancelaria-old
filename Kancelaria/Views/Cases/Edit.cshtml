@@ -1,0 +1,289 @@
+﻿@model Kancelaria.Models.Case
+@using Kancelaria.Models.Cases;
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link href="~/lib/bootstrap/dist/css/Case/Edit/case-edit.css" rel="stylesheet" />
+
+
+<h2 style="margin:auto; text-align:center; padding:10px; font-weight:bolder;">@Model.Name</h2>
+
+
+
+
+
+<h2>Edycja</h2>
+
+
+<div class="navbar navbar-inverse ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-case">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-case">
+            <ul class="nav navbar-nav">
+
+                <li  class="highlight" id="btnBasic" onclick="openBasicz('basic')">Podstawowe</li>
+                <li  class="highlight" id="btnParticipants" onclick="openBasicz('participants')">Uczestnicy</li>
+                <li class="highlight" id="btnrepetytory" onclick="openBasicz('repetytory')">Repetytorium</li>
+                <li class="highlight" id="btncaseInformation" onclick="openBasicz('caseInformation')">Informacje o sprawie</li>
+                <li  class="highlight" id="btncommunicationDetriment" onclick="openBasicz('communicationDetriment')">Dodatkowe</li>
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    
+    onLoad("@Model.repetytorium.Summon1", "summon1");
+    onLoad("@Model.repetytorium.Summon2", "summon2");
+    onLoad("@Model.repetytorium.Summon3", "summon3");
+    onLoad("@Model.repetytorium.Summon4", "summon4");
+    onLoad("@Model.repetytorium.Summon5", "summon5");
+
+    onLoad("@Model.repetytorium.Jugdment", "orzeczenie");
+
+    onLoad("@Model.repetytorium.JudgmentSummon1", "oSummon1");
+    onLoad("@Model.repetytorium.JudgmentSummon2", "oSummon2");
+    onLoad("@Model.repetytorium.JudgmentSummon3", "oSummon3");
+    onLoad("@Model.repetytorium.JudgmentSummon4", "oSummon4");
+    onLoad("@Model.repetytorium.JudgmentSummon5", "oSummon5");
+
+    onLoad("@Model.repetytorium.Appeal", "apelacja");
+
+    onLoad("@Model.repetytorium.AppealSummon1", "aSummon1");
+    onLoad("@Model.repetytorium.AppealSummon2", "aSummon2");
+    onLoad("@Model.repetytorium.AppealSummon3", "aSummon3");
+    onLoad("@Model.repetytorium.AppealSummon4", "aSummon4");
+    onLoad("@Model.repetytorium.AppealSummon5", "aSummon5");
+
+    onLoad("@Model.repetytorium.Cassation", "kasacja");
+
+    onLoad("@Model.repetytorium.CassationSummon1", "kSummon1");
+    onLoad("@Model.repetytorium.CassationSummon2", "kSummon2");
+    onLoad("@Model.repetytorium.CassationSummon3", "kSummon3");
+    onLoad("@Model.repetytorium.CassationSummon4", "kSummon4");
+    onLoad("@Model.repetytorium.CassationSummon5", "kSummon5");
+
+    onLoad("@Model.repetytorium.Clause", "klauzula");
+    onLoad("@Model.repetytorium.Execution", "egzekucja");
+
+    closeContent('div-print');
+
+</script>
+
+@await Html.PartialAsync("Print")
+
+
+
+
+
+
+
+
+<!--------------------------------------------------PODSTAWOWE--------------------------------------------------------------->
+<form asp-action="Edit" id="mainForm">
+
+    @await Html.PartialAsync("Basic")
+    <!--------------------------------------------------UCZESTNICY--------------------------------------------------------------->
+
+
+    @await Html.PartialAsync("Participants")
+
+    <!--------------------------------------------------REPETYTORIUM--------------------------------------------------------------->
+    <div class="resizable kancelaria-div" id="repetytory">
+        <div id="main-repetytory">
+            <h2 class="title" style="text-align:center">Repetytorium</h2>
+            <div class="container-fluid">
+                <input type="hidden" asp-for="repetytorium.ID" />
+                <input type="hidden" asp-for="repetytorium.CaseID" />
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input asp-for="repetytorium.Documents" type="checkbox" class="form-check-input">
+                        Dokumenty
+                    </label>
+                    <span asp-validation-for="repetytorium.Documents" class="text-danger" />
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input asp-for="repetytorium.Record" type="checkbox" class="form-check-input">
+                        Ewidencja
+                    </label>
+                    <span asp-validation-for="repetytorium.Record" class="text-danger" />
+                </div>
+                <h4 class="title" style="text-align:center">Wartość roszczenia i wezwania do zapłaty</h4>
+                @await Html.PartialAsync("Claims")
+            </div>
+        </div>
+
+        <!---------------------------------------------POZEW-------------------------------------------------------------------------------------->
+
+        @await Html.PartialAsync("Summons")
+        <!---------------------------------------------------------------ORZECZENIE I INSTANCJI-------------------------------------------------------------------------->
+        <div id="judgment-div">
+            <h4 class="highlight" style="text-align:center" onclick="resizeContent('orzeczenie'); changeBool('orzeczenieValue');"><b>Orzeczenie I instancji</b></h4>
+
+            <input id="orzeczenieValue" asp-for="repetytorium.Jugdment" type="hidden" value="@Model.repetytorium.Jugdment" />
+
+            <div id="orzeczenie" style="display:none;">
+                @await Html.PartialAsync("Judgment")
+
+            </div>
+        </div>
+        <!--KONIEC ORZECZENIA I INSTANCJI-->
+
+        <div id="appeal-div">
+            <h4 class="highlight" style="text-align:center" onclick="resizeContent('apelacja'); changeBool('apelacjaValue');"><b>Apelacja II instancja</b></h4>
+
+            <input id="apelacjaValue" asp-for="repetytorium.Appeal" type="hidden" value="@Model.repetytorium.Appeal" />
+            <!---------------------------------------------------------------APELACJA II INSTANCJI-------------------------------------------------------------------------->
+
+            <div id="apelacja" style="display:none;">
+                @await Html.PartialAsync("Appeal")
+                <!--KONIEC APELACJI II INSTANCJI-->
+            </div>
+        </div>
+
+        <div id="cassation-div">
+            <h4 class="highlight" style="text-align:center" onclick="resizeContent('kasacja'); changeBool('kasacjaValue');"><b>Skarga kasacyjna</b></h4>
+
+            <input id="kasacjaValue" asp-for="repetytorium.Cassation" type="hidden" value="@Model.repetytorium.Cassation" />
+            <!---------------------------------------------------------------Skarga kasacyjna-------------------------------------------------------------------------->
+
+            <div id="kasacja" style="display:none;">
+                @await Html.PartialAsync("Cassation")
+
+
+                <!--KONIEC Skargi kasacyjnej-->
+            </div>
+        </div>
+
+        <div id="clause-div">
+            <h4 class="highlight" style="text-align:center" onclick="resizeContent('klauzula'); changeBool('klauzulaValue');"><b>Postępowanie klauzulowe</b></h4>
+
+            <input id="klauzulaValue" asp-for="repetytorium.Clause" type="hidden" value="@Model.repetytorium.Clause" />
+            <!---------------------------------------------------------------Postępowanie klauzulowe-------------------------------------------------------------------------->
+            <div id="klauzula" style="display:none;">
+                @await Html.PartialAsync("Clause")
+            </div>
+        </div>
+        <!--------------KONIEC POSTEPOWANIE KLAUZULOWE-------------------->
+        
+        <div id="execution-div">
+            <h4 class="highlight" style="text-align:center" onclick="resizeContent('egzekucja'); changeBool('egzekucjaValue');"><b>Postępowanie egzekuzyjne</b></h4>
+            <input id="egzekucjaValue" asp-for="repetytorium.Execution" type="hidden" value="@Model.repetytorium.Execution" />
+            <!---------------------------------------------------------------Egzekucja-------------------------------------------------------------------------->
+            <div id="egzekucja" style="display:none;">
+                @await Html.PartialAsync("Execution")
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------INFORMACJE O SPRAWIE--------------------------------------------------------------->
+    <div class="resizable kancelaria-div" id="caseInformation">
+        <h2 class="title" style="text-align:center">Informacje o sprawie</h2>
+        @await Html.PartialAsync("Info")
+    </div>
+    <!--------------------------------------------------SZKODY KOMUNIKACYJNE--------------------------------------------------------------->
+    <div class="resizable kancelaria-div" id="communicationDetriment">
+        <h2 class="title" style="text-align:center">Dodatkowe</h2>
+
+        <div class="form-group">
+
+            <div class="row">
+                <div class="form-inline">
+                    <label asp-for="repetytorium.Additional" class="control-label" style="margin-left:30px"></label>
+                    <select asp-for="repetytorium.Additional" class="form-control">
+                        <option value="0">Wybierz</option>
+                        <option value="1" onclick="alert('Działa')">Szkody komunikacyjne</option>
+                    </select>
+                    <input class="button-kancelaria" id="saveForm" type="submit" value="Zapisz" onclick="changeOverlapInt('communicationDetriment')" />
+                </div>
+            </div>
+        </div>
+
+        @switch (Model.repetytorium.Additional)
+        {
+            case 1:
+                <div>
+                    @await Html.PartialAsync("MotorClaim")
+                </div>
+
+                break;
+            default:
+                break;
+        }
+
+    </div>
+
+    <!--FLOATING NAVBAR-->
+    <div class="div_bottomNavbar" id="edit-nav">
+        <ul class="ul_bottomNavbar">
+            <li class="li_bottomNavbar">
+                <input id="saveForm" type="submit" value="Zapisz" onclick="changeOverlapInt('basic')"  />
+            </li>
+            <li class="li_bottomNavbar">
+                <a asp-action="Index">Powrót</a>
+            </li>
+        </ul>
+    </div>
+
+    <input id="idvarover" type="hidden" name="varover" />
+    <input id="saveFormPrint" style="position:absolute; margin-left:-1000px" type="submit" value="Zapisz" onclick="changeOverlapInt('printMe')" />
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@if (Model.overlap != null)
+{
+    @if (Model.overlap == "basic")
+    {
+        ViewData["Message"] = "Zmiany zostały zapisane";
+        @await Html.PartialAsync("Message");
+    }
+
+    @if (Model.overlap == "printMe")
+    {
+        <script>
+        openContent('print-prompt');
+        </script>
+    }
+    else
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                //onLoadLast('@Model.overlap');
+                openBasicz('@Model.overlap');
+            });
+        </script>
+    }
+
+}

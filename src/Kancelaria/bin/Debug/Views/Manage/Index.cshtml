@@ -1,0 +1,139 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Zarządzaj kontem";
+}
+
+
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div class="kancelaria-div container-fluid">
+    <h2 class="title-h">Zarządzaj kontem</h2>
+
+    <div class="form-group col-md-8">
+
+        <label class="col-md-3 control-label" style="font-size:125%; margin-left:-15px">Hasło:</label>
+        <div class="col-md-6">
+            @if (Model.HasPassword)
+            {
+                <a asp-controller="Manage" class="button-kancelaria" style="padding:5px 20px 5px 20px; margin-top:-10px; font-size:125%" asp-action="ChangePassword">Zmień</a>
+            }
+            else
+            {
+                <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Stwórz</a>
+            }
+        </div>
+    </div>
+
+    <form asp-action="Index" id="mainForm">
+        <input type="hidden" asp-for="kancelariaUser.ID" />
+        <input type="hidden" asp-for="kancelariaUser.UserID" />
+
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.CompanyName" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.CompanyName" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.NIP" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.NIP" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.KRS" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.KRS" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.REGON" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.REGON" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h4 class="title-h">Adres</h4>
+            <div class="form-group col-md-8" style="margin-top:15px">
+                <label asp-for="kancelariaUser.Voivodship" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.Voivodship" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.County" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.County" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.Town" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.Town" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.PostCode" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.PostCode" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.Street" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.Street" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.BuildingNum" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.BuildingNum" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="row">
+            <h4 class="title-h">Kontakt</h4>
+
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.Phone" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.Phone" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.Mail" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.Mail" class="form-control" style="margin-top:-5px" />
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+                <label asp-for="kancelariaUser.HomePage" class="col-md-3 control-label" style="font-size:125%"></label>
+                <div class="col-md-6">
+                    <input asp-for="kancelariaUser.HomePage" class="form-control" style="margin-top:5px" />
+                </div>
+            </div>
+        </div>
+
+
+
+            <input class="button-kancelaria" type="submit" style="float:right" value="Zapisz zmiany" />
+        
+
+
+
+
+    </form>
+</div>

@@ -1,0 +1,110 @@
+﻿@model Kancelaria.Models.Case
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseCourtName" class="input-12"></label>
+            <input asp-for="repetytorium.ClauseCourtName" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseCourtName" class="text-danger" />
+        </div>
+        <div class="form-check" style="margin-top:30px">
+            <label class="form-check-label">
+                <input asp-for="repetytorium.ClauseWniosekKlauzulaPrytwatnosci" type="checkbox" class="form-check-input">
+                Wniosek o klauzulę prawomocności
+            </label>
+            <span asp-validation-for="repetytorium.ClauseWniosekKlauzulaPrytwatnosci" class="text-danger" />
+        </div>
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseDataNadania" class="input-12"></label>
+            <input asp-for="repetytorium.ClauseDataNadania" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseDataNadania" class="text-danger" />
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ClauseDataWyslania" class="input-12"></label>
+                        <input asp-for="repetytorium.ClauseDataWyslania" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.ClauseDataWyslania" class="text-danger" />
+                    </div>
+                </td>
+                <td style="padding-left:50px">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ClauseDataOdbioru"></label>
+                        <input asp-for="repetytorium.ClauseDataOdbioru" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.ClauseDataOdbioru" class="text-danger" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-check" style="margin-top:30px">
+            <label class="form-check-label">
+                <input asp-for="repetytorium.ClauseWniosekKlauzulaWykonalnosci" type="checkbox" class="form-check-input">
+                Wniosek o klauzulę wykonalności
+            </label>
+            <span asp-validation-for="repetytorium.ClauseWniosekKlauzulaWykonalnosci" class="text-danger" />
+        </div>
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseDataNadania2" class="input-12"></label>
+            <input asp-for="repetytorium.ClauseDataNadania2" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseDataNadania2" class="text-danger" />
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ClauseDataWyslania2" class="input-12"></label>
+                        <input asp-for="repetytorium.ClauseDataWyslania2" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.ClauseDataWyslania2" class="text-danger" />
+                    </div>
+                </td>
+                <td style="padding-left:50px">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ClauseDataOdbioru2"></label>
+                        <input asp-for="repetytorium.ClauseDataOdbioru2" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.ClauseDataOdbioru2" class="text-danger" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-5">
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseWartosc" class="input-20"></label>
+            <input asp-for="repetytorium.ClauseWartosc" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseWartosc" class="text-danger" />
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="form-check" style="margin-right:30px;">
+                        <label class="form-check-label">
+                            <input asp-for="repetytorium.ClausePayment" type="radio" class="form-check-input" value="0">
+                            faktura netto
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check" style="margin-right:30px;">
+                        <label class="form-check-label">
+                            <input asp-for="repetytorium.ClausePayment" type="radio" class="form-check-input" value="1">
+                            faktura brutto
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseKosztyZastepstwa" class="input-20"></label>
+            <input asp-for="repetytorium.ClauseKosztyZastepstwa" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseKosztyZastepstwa" class="text-danger" />
+        </div>
+        <div class="form-inline">
+            <label asp-for="repetytorium.ClauseOplatySadowe" class="input-20"></label>
+            <input asp-for="repetytorium.ClauseOplatySadowe" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.ClauseOplatySadowe" class="text-danger" />
+        </div>
+    </div>
+</div>
+

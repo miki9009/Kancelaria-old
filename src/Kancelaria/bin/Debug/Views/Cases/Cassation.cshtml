@@ -1,0 +1,242 @@
+﻿@model Kancelaria.Models.Case
+
+<div class="row">
+    <div class="col-lg-5" style="float:left">
+        <div class="form-inline" style="margin-bottom:20px">
+            <label asp-for="repetytorium.CassationCourtName"></label>
+            <input asp-for="repetytorium.CassationCourtName" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.CassationCourtName" class="text-danger" />
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <label asp-for="repetytorium.CassationDataWyslaniaApelacji"></label>
+                        <input asp-for="repetytorium.CassationDataWyslaniaApelacji" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationDataWyslaniaApelacji" class="text-danger" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <label asp-for="repetytorium.CassationDataOdbioruApelacji"></label>
+                        <input asp-for="repetytorium.CassationDataOdbioruApelacji" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationDataOdbioruApelacji" class="text-danger" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div>
+            <label asp-for="repetytorium.CassationDataWyrokuApelacyjnego"></label>
+            <input asp-for="repetytorium.CassationDataWyrokuApelacyjnego" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.CassationDataWyrokuApelacyjnego" class="text-danger" />
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <label asp-for="repetytorium.CassationWysokoscOplaty"></label>
+                        <input asp-for="repetytorium.CassationWysokoscOplaty" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationWysokoscOplaty" class="text-danger" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <label asp-for="repetytorium.CassationDataOplaty"></label>
+                        <input asp-for="repetytorium.CassationDataOplaty" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationDataOplaty" class="text-danger" />
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+
+        <fieldset class="form-group">
+            <legend style="margin-bottom:10px; margin-top:20px; margin-left:20px">Opłaty dokonał:</legend>
+            <div class="row" style="background-color:lightgray">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="form-check" style="margin-right:30px;">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.CassationOplatyDokonal" type="radio" class="form-check-input" value="0">
+                                    Klient
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check" style="margin-right:30px;">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.CassationOplatyDokonal" type="radio" class="form-check-input" value="1">
+                                    Kancelaria
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.CassationOplatyDokonal" type="radio" class="form-check-input" value="2">
+                                    Zleceniodawca
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+
+        <!--END-->
+
+    </div>
+    <div class="col-lg-5" style="float:right">
+        <div class="form-inline">
+            <label class="form-check-label" style="margin-bottom:30px">
+                <input asp-for="repetytorium.CassationPrawomocnosc" type="checkbox" class="form-check-input">
+                Stwierdzona prawomocność orzeczenia
+            </label>
+            <span asp-validation-for="repetytorium.CassationPrawomocnosc" class="text-danger" />
+        </div>
+
+        <div class="form-inline">
+            <label asp-for="repetytorium.CassationKosztyWnioskowane" class="input-20"></label>
+            <input asp-for="repetytorium.CassationKosztyWnioskowane" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.CassationKosztyWnioskowane" class="text-danger" />
+        </div>
+        <div class="form-inline">
+            <label asp-for="repetytorium.CassationKosztyPrzyznane" class="input-20"></label>
+            <input asp-for="repetytorium.CassationKosztyPrzyznane" class="form-control input-20" />
+            <span asp-validation-for="repetytorium.CassationKosztyPrzyznane" class="text-danger" />
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <!--SPRAWY-->
+    <div id="cassation-cases">
+        <div class="highlight" style="text-align:center" onclick="resizeContent('kSummon1'); changeBool('kSummon1Value');">
+            Rozprawa I
+            <input id="kSummon1Value" asp-for="repetytorium.CassationSummon1" type="hidden" value="@Model.repetytorium.CassationSummon1" />
+        </div>
+
+        <div id="kSummon1" class="form-group" style="display:none; border-style:solid; border-color:lightgray; border-width:thin">
+            <div class="row">
+                <div class="form-inline col-lg-4">
+                    <label asp-for="repetytorium.CassationSummonsDate1"></label>
+                    <input asp-for="repetytorium.CassationSummonsDate1" class="form-control input-20" />
+                    <span asp-validation-for="repetytorium.CassationSummonsDate1" class="text-danger" />
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.CassationSummonsTime1"></label>
+                        <input asp-for="repetytorium.CassationSummonsTime1" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationSummonsTime1" class="text-danger" />
+                    </div>
+                </div>
+            </div>
+            <h4 class="title" style="text-align:center; background-color: white; color:black"><b>UWAGI</b></h4>
+            <textarea asp-for="repetytorium.CassationRemarkSummons1" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            <span asp-validation-for="repetytorium.CassationRemarkSummons1" class="text-danger" />
+        </div>
+
+        <div class="highlight" style="text-align:center" onclick="resizeContent('kSummon2'); changeBool('kSummon2Value');">
+            Rozprawa II
+            <input id="kSummon2Value" asp-for="repetytorium.CassationSummon2" type="hidden" value="@Model.repetytorium.CassationSummon2" />
+        </div>
+
+        <div id="kSummon2" class="form-group" style="display:none; border-style:solid; border-color:lightgray; border-width:thin">
+            <div class="row">
+                <div class="form-inline col-lg-4">
+                    <label asp-for="repetytorium.CassationSummonsDate2"></label>
+                    <input asp-for="repetytorium.CassationSummonsDate2" class="form-control input-20" />
+                    <span asp-validation-for="repetytorium.CassationSummonsDate2" class="text-danger" />
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.CassationSummonsTime2"></label>
+                        <input asp-for="repetytorium.CassationSummonsTime2" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationSummonsTime2" class="text-danger" />
+                    </div>
+                </div>
+            </div>
+            <h4 class="title" style="text-align:center; background-color: white; color:black"><b>UWAGI</b></h4>
+            <textarea asp-for="repetytorium.CassationRemarkSummons2" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            <span asp-validation-for="repetytorium.CassationRemarkSummons2" class="text-danger" />
+        </div>
+
+        <div class="highlight" style="text-align:center" onclick="resizeContent('kSummon3'); changeBool('kSummon3Value');">
+            Rozprawa III
+            <input id="kSummon3Value" asp-for="repetytorium.CassationSummon3" type="hidden" value="@Model.repetytorium.CassationSummon3" />
+        </div>
+
+        <div id="kSummon3" class="form-group" style="display:none; border-style:solid; border-color:lightgray; border-width:thin">
+            <div class="row">
+                <div class="form-inline col-lg-4">
+                    <label asp-for="repetytorium.CassationSummonsDate3"></label>
+                    <input asp-for="repetytorium.CassationSummonsDate3" class="form-control input-20" />
+                    <span asp-validation-for="repetytorium.CassationSummonsDate3" class="text-danger" />
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.CassationSummonsTime3"></label>
+                        <input asp-for="repetytorium.CassationSummonsTime3" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationSummonsTime3" class="text-danger" />
+                    </div>
+                </div>
+            </div>
+            <h4 class="title" style="text-align:center; background-color: white; color:black"><b>UWAGI</b></h4>
+            <textarea asp-for="repetytorium.CassationRemarkSummons3" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            <span asp-validation-for="repetytorium.CassationRemarkSummons3" class="text-danger" />
+        </div>
+
+        <div class="highlight" style="text-align:center" onclick="resizeContent('kSummon4'); changeBool('kSummon4Value');">
+            Rozprawa IV
+            <input id="kSummon4Value" asp-for="repetytorium.CassationSummon4" type="hidden" value="@Model.repetytorium.CassationSummon4" />
+        </div>
+
+        <div id="kSummon4" class="form-group" style="display:none; border-style:solid; border-color:lightgray; border-width:thin">
+            <div class="row">
+                <div class="form-inline col-lg-4">
+                    <label asp-for="repetytorium.CassationSummonsDate4"></label>
+                    <input asp-for="repetytorium.CassationSummonsDate4" class="form-control input-20" />
+                    <span asp-validation-for="repetytorium.CassationSummonsDate4" class="text-danger" />
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.CassationSummonsTime4"></label>
+                        <input asp-for="repetytorium.CassationSummonsTime4" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationSummonsTime4" class="text-danger" />
+                    </div>
+                </div>
+            </div>
+            <h4 class="title" style="text-align:center; background-color: white; color:black"><b>UWAGI</b></h4>
+            <textarea asp-for="repetytorium.CassationRemarkSummons4" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            <span asp-validation-for="repetytorium.CassationRemarkSummons4" class="text-danger" />
+        </div>
+
+        <div class="highlight" style="text-align:center" onclick="resizeContent('kSummon5'); changeBool('kSummon5Value');">
+            Rozprawa V
+            <input id="kSummon5Value" asp-for="repetytorium.CassationSummon5" type="hidden" value="@Model.repetytorium.CassationSummon5" />
+        </div>
+
+        <div id="kSummon5" class="form-group" style="display:none; border-style:solid; border-color:lightgray; border-width:thin">
+            <div class="row">
+                <div class="form-inline col-lg-4">
+                    <label asp-for="repetytorium.CassationSummonsDate5"></label>
+                    <input asp-for="repetytorium.CassationSummonsDate5" class="form-control input-20" />
+                    <span asp-validation-for="repetytorium.CassationSummonsDate5" class="text-danger" />
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.CassationSummonsTime5"></label>
+                        <input asp-for="repetytorium.CassationSummonsTime5" class="form-control input-20" />
+                        <span asp-validation-for="repetytorium.CassationSummonsTime5" class="text-danger" />
+                    </div>
+                </div>
+            </div>
+            <h4 class="title" style="text-align:center; background-color: white; color:black"><b>UWAGI</b></h4>
+            <textarea asp-for="repetytorium.CassationRemarkSummons5" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            <span asp-validation-for="repetytorium.CassationRemarkSummons5" class="text-danger" />
+        </div>
+    </div>
+</div>

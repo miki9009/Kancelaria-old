@@ -1,0 +1,399 @@
+﻿@model Kancelaria.Models.Case
+@using Kancelaria.Models.Cases
+
+<div class="resizable kancelaria-div" id="basic">
+    <h2 class="title" style="text-align:center">Podstawowe dane</h2>
+    <div id="basicContent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+
+        <!--BASIC-->
+        <input type="hidden" asp-for="basic.ID" />
+        <input type="hidden" asp-for="basic.CaseID" />
+        <h4 class="title" style="text-align:center">Cechy</h4>
+        <div class="container-fluid">
+
+            <div class="row">
+                <!----------------------------------Cechy---------------------------------------->
+                <div class="form-group">
+                    <label asp-for="Name" class="col-md-2 control-label" style="font-size:125%;"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="col-md-2 control-label" style="font-size:125%;"></label>
+
+                    <div class="col-md-10">
+                        <input asp-for="Date" class="form-control" />
+                        <span asp-validation-for="Date" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pelnomocnik" style="font-size:125%;" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Pelnomocnik" class="form-control" />
+                        <span asp-validation-for="Pelnomocnik" class="text-danger" />
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------->
+                <div style="border-bottom:solid; padding-top:95px; border-color:darkgray;">
+
+                </div>
+
+                <div class="col-sm-6">
+                    <!--Kategoria sprawy-->
+                    <div class="form-group" style="padding-top:20px;">
+                        <label asp-for="basic.CaseCategory" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="basic.CaseCategory" class="form-control">
+                                @for (int v = 0; v < Basic.categoriesList.Count; v++)
+                                {
+                                    <option value="@v">@Basic.categoriesList[v]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!--Pozycja w sprawie-->
+                    <div class="form-group" style="padding-top:20px;">
+                        <label asp-for="basic.CasePosition" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="basic.CasePosition " class="form-control">
+                                <option value="0"> </option>
+                                <option value="1">oskarzyciel</option>
+                                <option value="2">obwiniony / oskarżony</option>
+                                <option value="3">powód</option>
+                                <option value="4">pozwany</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!--Podmiot sprawy-->
+                    <div class="form-group" style="padding-top:20px;">
+                        <label asp-for="basic.CaseSubject" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="basic.CaseSubject" class="form-control">
+                                @for (int v = 0; v < Basic.subjectList.Count; v++)
+                                {
+                                    <option value="@v">@Basic.subjectList[v]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" id="icons">
+                    <ul style="width:auto; list-style:none; height:auto; overflow:hidden; padding:0;">
+                        <li>
+                            <a>
+                                <img class="Icons" src="~/images/icon_print.png" title="Drukuj Sprawę." onclick="document.getElementById('saveFormPrint').click()" />
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-action="Download" asp-route-id="@Model.ID">
+                                <img class="Icons" src="~/images/icon_word.png" title="Zapisz jako plik '.docx'" />
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Cases" asp-action="ReturnPDF" asp-route-id="@Model.ID">
+                                <img class="Icons" src="~/images/Icon_pdf.png" title="Otwórz sprawę jako '.pdf'" />
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index">
+                                <img class="Icons" src="~/images/icon_attach.png" title="Dodaj załącznik do sprawy" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--------------------------------------POWÓD I POZWANY-------------------------------------->
+
+
+                <!--Imię-->
+                <div class="col-sm-6" style="background-color: lightgray; border-style:inset; border-color: silver; border-width:thin">
+                    <div>
+                        <!--Powód-->
+                        <h4 class="title" style="text-align:center">Powód</h4>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1Name" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Name" class="form-control" />
+                            <span asp-validation-for="basic.S1Name" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nazwisko-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1Surname" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Surname" class="form-control" />
+                            <span asp-validation-for="basic.S1Surname" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Miejscowość-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1Town" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Town" class="form-control" />
+                            <span asp-validation-for="basic.S1Town" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Firma-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1Company" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Company" class="form-control" />
+                            <span asp-validation-for="basic.S1Company" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Kod pocztowy-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1PostCode" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1PostCode" class="form-control" />
+                            <span asp-validation-for="basic.S1PostCode" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Ulica-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1Street" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Street" class="form-control" />
+                            <span asp-validation-for="basic.S1Street" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nr Budynku-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1BuildingNum" class="col-md-6 control-label"></label>
+                        <div class="col-md-4">
+                            <input asp-for="basic.S1BuildingNum" class="form-control" />
+                            <span asp-validation-for="basic.S1BuildingNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Województwo-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1Voivodship" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="basic.S1Voivodship" class="form-control">
+                                @for (int v = 0; v < Basic.voivodshipList.Count; v++)
+                                {
+                                    <option value="@v">@Basic.voivodshipList[v]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <!--Powiat-->
+                    <div class="form-group">
+                        <label asp-for="basic.S1County" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1County" class="form-control" />
+                            <span asp-validation-for="basic.S1County" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1IdentityNum" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1IdentityNum" class="form-control" />
+                            <span asp-validation-for="basic.S1IdentityNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1PESEL" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1PESEL" class="form-control" />
+                            <span asp-validation-for="basic.S1PESEL" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1NIP" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1NIP" class="form-control" />
+                            <span asp-validation-for="basic.S1NIP" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1KRS" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1KRS" class="form-control" />
+                            <span asp-validation-for="basic.S1KRS" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1REGON" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1REGON" class="form-control" />
+                            <span asp-validation-for="basic.S1REGON" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1Mail" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1Mail" class="form-control" />
+                            <span asp-validation-for="basic.S1Mail" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="basic.S1TelHomeNum" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1TelHomeNum" class="form-control" />
+                            <span asp-validation-for="basic.S1TelHomeNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S1TelCell" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S1TelCell" class="form-control" />
+                            <span asp-validation-for="basic.S1TelCell" class="text-danger" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" style="background-color: lightgray; border-style:inset; border-color: silver; border-width:thin">
+                    <!--Pozwany-->
+                    <div>
+                        <!--Pozwany-->
+                        <h4 class="title" style="text-align:center">Pozwany</h4>
+                    </div>
+                    <!--Imię-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Name" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Name" class="form-control" />
+                            <span asp-validation-for="basic.S2Name" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nazwisko-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Surname" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Surname" class="form-control" />
+                            <span asp-validation-for="basic.S2Surname" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Firma-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Company" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Company" class="form-control" />
+                            <span asp-validation-for="basic.S2Company" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Miejscowość-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Town" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Town" class="form-control" />
+                            <span asp-validation-for="basic.S2Town" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Kod pocztowy-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2PostCode" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2PostCode" class="form-control" />
+                            <span asp-validation-for="basic.S2PostCode" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Ulica-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Street" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Street" class="form-control" />
+                            <span asp-validation-for="basic.S2Street" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Nr Budynku-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2BuildingNum" class="col-md-6 control-label"></label>
+                        <div class="col-md-4">
+                            <input asp-for="basic.S2BuildingNum" class="form-control" />
+                            <span asp-validation-for="basic.S2BuildingNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <!--Województwo-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2Voivodship" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <select asp-for="basic.S2Voivodship" class="form-control">
+                                @for (int v = 0; v < Basic.voivodshipList.Count; v++)
+                                {
+                                    <option value="@v">@Basic.voivodshipList[v]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <!--Powiat-->
+                    <div class="form-group">
+                        <label asp-for="basic.S2County" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2County" class="form-control" />
+                            <span asp-validation-for="basic.S2County" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2IdentityNum" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2IdentityNum" class="form-control" />
+                            <span asp-validation-for="basic.S2IdentityNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2PESEL" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2PESEL" class="form-control" />
+                            <span asp-validation-for="basic.S2PESEL" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2NIP" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2NIP" class="form-control" />
+                            <span asp-validation-for="basic.S2NIP" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2KRS" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2KRS" class="form-control" />
+                            <span asp-validation-for="basic.S2KRS" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2REGON" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2REGON" class="form-control" />
+                            <span asp-validation-for="basic.S2REGON" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2Mail" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2Mail" class="form-control" />
+                            <span asp-validation-for="basic.S2Mail" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="basic.S2TelHomeNum" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2TelHomeNum" class="form-control" />
+                            <span asp-validation-for="basic.S2TelHomeNum" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="basic.S2TelCell" class="col-md-4 control-label"></label>
+                        <div class="col-md-6">
+                            <input asp-for="basic.S2TelCell" class="form-control" />
+                            <span asp-validation-for="basic.S2TelCell" class="text-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--KONIEC POWODA I POZWANEGO-->
+        </div>
+    </div>

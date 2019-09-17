@@ -1,0 +1,113 @@
+﻿@model Kancelaria.Models.Case
+
+
+<table>
+    <tr>
+        <td class="col-lg-5">
+            <div>
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionKomornikAdres" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionKomornikAdres" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionKomornikAdres" class="text-danger" />
+                </div>
+
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionWniosek" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionWniosek" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionWniosek" class="text-danger" />
+                </div>
+
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionWartoscPrzedmiotu" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionWartoscPrzedmiotu" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionWartoscPrzedmiotu" class="text-danger" />
+                </div>
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionSkierowanieDoKomornika" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionSkierowanieDoKomornika" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionSkierowanieDoKomornika" class="text-danger" />
+                </div>
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionKosztyZastepstwa" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionKosztyZastepstwa" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionKosztyZastepstwa" class="text-danger" />
+                </div>
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionKosztyZastepstwa2" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionKosztyZastepstwa2" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionKosztyZastepstwa2" class="text-danger" />
+                </div>
+                <div class="form-inline">
+                    <label asp-for="repetytorium.ExecutionFakturaNetto" class="input-25"></label>
+                    <input asp-for="repetytorium.ExecutionFakturaNetto" class="form-control input-17" />
+                    <span asp-validation-for="repetytorium.ExecutionFakturaNetto" class="text-danger" />
+                </div>
+
+            </div>
+        </td>
+        <td class="col-lg-5">
+            <div >
+                <div>
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ExecutionDataPierwszejLicytacji" class="input-25"></label>
+                        <input asp-for="repetytorium.ExecutionDataPierwszejLicytacji" class="form-control input-17" />
+                        <span asp-validation-for="repetytorium.ExecutionDataPierwszejLicytacji" class="text-danger" />
+                    </div>
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ExecutionDataZawieszenia" class="input-25"></label>
+                        <input asp-for="repetytorium.ExecutionDataZawieszenia" class="form-control input-17" />
+                        <span asp-validation-for="repetytorium.ExecutionDataZawieszenia" class="text-danger" />
+                    </div>
+                    <div class="form-inline">
+                        <label asp-for="repetytorium.ExecutionDataZakonczenia" class="input-25"></label>
+                        <input asp-for="repetytorium.ExecutionDataZakonczenia" class="form-control input-17" />
+                        <span asp-validation-for="repetytorium.ExecutionDataZakonczenia" class="text-danger" />
+                    </div>
+                    <fieldset class="form-group">
+                        <legend style="margin-bottom:10px">Rodzaj egzekucji:</legend>
+                        <div style="background-color:lightgray;">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="0">
+                                    Ruchomość i termin I i II licytacji
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="1">
+                                    Nieruchomość (ew. nr. księgi wieczystej i termin I i II licytacji)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="2">
+                                    Rachunek bankowy
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="3">
+                                    Wierzytelności
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="4">
+                                    Wynagrodzenie
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input asp-for="repetytorium.ExecutionRodzaj" type="radio" class="form-check-input" value="5">
+                                    Inne
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+    
+    

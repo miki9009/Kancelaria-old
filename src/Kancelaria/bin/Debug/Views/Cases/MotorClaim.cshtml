@@ -1,0 +1,232 @@
+﻿@model Kancelaria.Models.Case
+
+
+<table>
+<tr>
+    <td class="col-lg-5">
+        <div >
+            <input type="hidden" asp-for="motorClaim.CaseID" />
+            <input type="hidden" asp-for="motorClaim.MotorClaimID" />
+
+            <div class="form-check">
+                <label class="form-check-label" style="margin-bottom:30px">
+                    <input asp-for="motorClaim.MotorSzkodaZgloszona" type="checkbox" class="form-check-input">
+                    Czy zgłoszono szkodę?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label" style="margin-bottom:30px">
+                    <input asp-for="motorClaim.MotorUmowaPrzelewuWierzytelnosci" type="checkbox" class="form-check-input">
+                    Umowa przelewu wierzytelności
+                </label>
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorDataZgloszeniaSzkody" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDataZgloszeniaSzkody" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataZgloszeniaSzkody" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotroDataSzkody" class="input-25"></label>
+                <input asp-for="motorClaim.MotroDataSzkody" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotroDataSzkody" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorNumerSzkody" class="input-25"></label>
+                <input asp-for="motorClaim.MotorNumerSzkody" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorNumerSzkody" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorDanePojazdu" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDanePojazdu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDanePojazdu" class="text-danger" />
+            </div>
+
+            <fieldset class="form-group">
+                <legend style="margin-bottom:10px">Rodzaj szkody:</legend>
+                <div style="background-color:lightgray;">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="motorClaim.MotorRodzajSzkody" type="radio" class="form-check-input" value="0">
+                            AC
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="motorClaim.MotorRodzajSzkody" type="radio" class="form-check-input" value="1">
+                            OC
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="motorClaim.MotorRodzajSzkody" type="radio" class="form-check-input" value="2">
+                            Majątkowa
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input asp-for="motorClaim.MotorRodzajSzkody" type="radio" class="form-check-input" value="3">
+                            Osobowa
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-check">
+                <label class="form-check-label" style="margin-bottom:30px">
+                    <input asp-for="motorClaim.MotorInformacjeOzawartejUgodzie" type="checkbox" class="form-check-input">
+                    Informacje o zawartej ugodzie
+                </label>
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorWartoscPrzedmiotuSporu" class="input-25"></label>
+                <input asp-for="motorClaim.MotorWartoscPrzedmiotuSporu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorWartoscPrzedmiotuSporu" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorOplataOdPozwu" class="input-25"></label>
+                <input asp-for="motorClaim.MotorOplataOdPozwu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorOplataOdPozwu" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorWezwanieDoZaplaty" class="input-25"></label>
+                <input asp-for="motorClaim.MotorWezwanieDoZaplaty" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorWezwanieDoZaplaty" class="text-danger" />
+            </div>
+
+            <div class="form-inline" style="margin-left:255px;">
+                <input asp-for="motorClaim.MotorDataWezwaniaDoZaplaty" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWezwaniaDoZaplaty" class="text-danger" />
+            </div>
+
+            <div class="form-inline" style="margin-top:35px;">
+                <label asp-for="motorClaim.MotorDataWniesieniaPozwu" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDataWniesieniaPozwu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWniesieniaPozwu" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorDataWydaniaNakazuZaplaty" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDataWydaniaNakazuZaplaty" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWydaniaNakazuZaplaty" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorOdpowiedzNaSprzeciw" class="input-25"></label>
+                <input asp-for="motorClaim.MotorOdpowiedzNaSprzeciw" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorOdpowiedzNaSprzeciw" class="text-danger" />
+            </div>
+
+            <div class="form-inline">
+                <label asp-for="motorClaim.MotorDataOdbioruSprzeciwu" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDataOdbioruSprzeciwu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataOdbioruSprzeciwu" class="text-danger" />
+            </div>
+        </div>
+    </td>
+    <td class="col-lg-5" >
+        <div style="margin-left:100px" >
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label asp-for="motorClaim.MotorDataPoczatkowaNaliczaniaOdsetek" class="input-25"></label>
+                <input asp-for="motorClaim.MotorDataPoczatkowaNaliczaniaOdsetek" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataPoczatkowaNaliczaniaOdsetek" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorWysokoscWplaconegoOdszkodowania"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorWysokoscWplaconegoOdszkodowania" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataWysokoscWplaconegoOdszkodowania" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWysokoscWplaconegoOdszkodowania" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorWysokoscWplaconegoOdszkodowania" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorKalkulacjaNaprawyPozwanego"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorKalkulacjaNaprawyPozwanego" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataKalkulacjaNaprawyPozwanego" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataKalkulacjaNaprawyPozwanego" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorKalkulacjaNaprawyPozwanego" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataWartoscNaprawyPozwanego"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorWartoscNaprawyPozwanego" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataWartoscNaprawyPozwanego" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWartoscNaprawyPozwanego" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorWartoscNaprawyPozwanego" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataKalkulacjaNaprawyPowoda"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorKalkulacjaNaprawyPowoda" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataKalkulacjaNaprawyPowoda" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataKalkulacjaNaprawyPowoda" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorKalkulacjaNaprawyPowoda" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataWartoscNaprawyPowoda"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorWartoscNaprawyPowoda" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataWartoscNaprawyPowoda" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataWartoscNaprawyPowoda" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorWartoscNaprawyPowoda" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataPotwierdzenieRealizacjiPrzelewu"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorWartoscNaprawyPowoda" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorPotwierdzenieRealizacjiPrzelewu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataPotwierdzenieRealizacjiPrzelewu" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorPotwierdzenieRealizacjiPrzelewu" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataFakturaVATNaprawaPojazdu"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorFakturaVatNaprawaPojazdu" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataFakturaVATNaprawaPojazdu" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataFakturaVATNaprawaPojazdu" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorFakturaVatNaprawaPojazdu" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataFakturaVATNajemPojazduZastepczego"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorFakturaVATNajemPojazduZastepczego" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorDataFakturaVATNajemPojazduZastepczego" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataFakturaVATNajemPojazduZastepczego" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorFakturaVATNajemPojazduZastepczego" class="text-danger" />
+            </div>
+
+            <label asp-for="motorClaim.MotorDataFakturaVATKalkulacjeKosztowNaprawy"></label>
+            <div class="form-inline" style="margin-bottom:20px;">
+                <label>Kwota:</label>
+                <input asp-for="motorClaim.MotorDataFakturaVATKalkulacjeKosztowNaprawy" class="form-control input-20" />
+                <input asp-for="motorClaim.MotorFakturaVATKalkulacjeKosztowNaprawy" class="form-control input-20" />
+                <span asp-validation-for="motorClaim.MotorDataFakturaVATKalkulacjeKosztowNaprawy" class="text-danger" />
+                <span asp-validation-for="motorClaim.MotorFakturaVATKalkulacjeKosztowNaprawy" class="text-danger" />
+            </div>
+
+        </div>
+    </td>
+</tr>
+</table>
+
+
+
+    
+
+

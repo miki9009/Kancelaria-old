@@ -1,0 +1,65 @@
+﻿@model Kancelaria.Models.Case
+
+@{
+    ViewData["Title"] = "Nowa sprawa";
+}
+
+
+<div class="container-fluid kancelaria-div" >
+    <h4 class="title-h">Nowa sprawa</h4>
+
+
+    <form asp-action="Create">
+        <div class="form-horizontal col-md-8" style="margin-top:15px">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="col-md-3 control-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="Date" id="date-time" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-md-3 control-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pelnomocnik" class="col-md-3 control-label"></label>
+                <div class="col-md-6">
+                    <input asp-for="Pelnomocnik" class="form-control" />
+                    <span asp-validation-for="Pelnomocnik" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-md-5" style="float:right">
+                    <input type="submit" value="Stwórz" class="button-kancelaria" />
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index" class="button-kancelaria">powrót</a>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<script>
+    function currentDate() {
+        document.getElementById("date-time").value = "@string.Format("{0:0000}-{1:00}-{2:00}", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day)";
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        currentDate();
+    });
+</script>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

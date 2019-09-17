@@ -1,0 +1,119 @@
+﻿@model Kancelaria.Models.Notification
+@using Microsoft.Extensions.WebEncoders;
+@using System.Text.Encodings.Web;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="~/css/notifications.css" rel="stylesheet" />
+
+<div class="container-fluid kancelaria-div">
+    <h4 class="title-h" style="margin:0 0 0 0; border-top-left-radius:12px; border-top-right-radius:12px; border-bottom-right-radius:12px">Wiadomości</h4>
+    <div class="row" style="margin:0 0 0 0">
+        <div style="margin-right:20px; border-bottom-left-radius:12px; border-bottom-right-radius:12px; max-width:250px;background-color: #003d77; ">
+            <p>
+                <a class="button-kancelaria" asp-action="Create" style="width:95%; margin:10px 5px 15px 5px">Wyślij wiadomość</a>
+            </p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td id="left-menu">
+                @if (Model.currentNotifications.Count > 0)
+                {
+                    <ul style="height: 700px; width:250px">
+                        @for (int i = Model.currentNotifications.Count - 1; i > -1; i--)
+                        {
+                            <li style="margin-right:2px" id="@i" onclick="openNotification(@i)">
+                                @if (Model.currentNotifications[i].Viewed)
+                                {
+                                    <label style="color:gray">Od: @Model.currentNotifications[i].From </label>
+                                }
+                                else
+                                {
+                                    <label>Od: @Model.currentNotifications[i].From </label>
+                                }
+                                <p style="color:darkgray">@Model.currentNotifications[i].Title</p>
+                                <p>@Model.currentNotifications[i].DateCreated</p>
+                            </li>
+                        }
+
+                    </ul>
+                }
+                else
+                {
+                    <ul style="height: 700px; width:250px">
+                        <li style="margin-right:2px; background-color:lightgray; border:none">
+                            <h4 style="color:black; text-align:center">Brak wiadomości</h4>
+                        </li>
+                    </ul>
+
+                }
+          </td>
+            <td style="height:700px; width:100%">
+                <div id="notification-content">
+                    <p id="mail-date" style="float:right; margin:15px 10px 10px 10px"></p>
+                    <p id="mail-from" style="margin:15px 5px 10px 5px; border-bottom:inset lightgray thin"></p>
+                    
+                    <p id="mail-title" style="margin:15px 5px 10px 5px; border-bottom:inset lightgray thin; font-size:115%"></p>
+                    <div id="mail-body" style="max-width:700px">
+                        <!----------------------------------------------------------------------------------------------------->
+
+                        <img style="margin:30px 30px 30px 30px; margin-left:45%" src="~/images/pobrane.png" />
+                        <h1  class="title-h" style="width:120%"><strong>Skrzynka odbiorcza</strong></h1>
+                        <!----------------------------------------------------------------------------------------------------->
+                    </div>
+ 
+                </div>
+                <button class="button-kancelaria" style="float:right" onclick="goTo()">Usuń</button>
+                
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+@if (Model.currentNotifications.Count > 0)
+{
+
+<script>
+
+
+    var mails = [];
+    var n_id = @Model.currentNotifications[0].ID;
+
+    function openNotification(parameter) {
+        document.getElementById(parameter).getElementsByTagName('label')[0].style.color = "gray";
+        document.getElementById("mail-title").innerHTML = "<strong>Temat:  </strong>" + mails[parameter].mail_title;
+        document.getElementById("mail-from").innerHTML = "<strong>Od:  </strong>" + mails[parameter].mail_from;
+        document.getElementById("mail-body").innerHTML = mails[parameter].mail_body;
+        document.getElementById("mail-date").innerHTML = "<b>Data:  </b>" + mails[parameter].mail_date;
+        n_id = mails[parameter].mail_id;
+    }
+
+    function goTo() {
+     window.location.href = "/Notifications/Delete/?id=" +n_id;    
+    }
+</script>
+
+    var encoder = JavaScriptEncoder.Create();
+
+
+
+    @foreach (var ev in Model.currentNotifications)
+    {
+        <script>
+            var obj = {
+                mail_title: "@encoder.Encode(ev.Title == null ? "brak" : ev.Title)",
+                mail_date: "@encoder.Encode(ev.DateCreated == null ? "brak" : ev.DateCreated)",
+                mail_from: "@encoder.Encode(ev.From == null ? "brak" : ev.From)",
+                mail_body: "@encoder.Encode(ev.Body == null ? "brak" : ev.Body)",
+                mail_id: "@ev.ID"
+            };
+
+            mails.push(obj);
+        </script>
+
+    }
+
+    }

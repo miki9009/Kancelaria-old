@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Kancelaria.Models
+@using Kancelaria.Models.Admin
+@using Kancelaria.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{ 
+    bool isLogged = SignInManager.IsSignedIn(User);
+ }
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Kancelaria</title>
+
+    <environment names="Development,Staging,Production">
+       <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" media="all" />
+        <link href="~/css/printcase.css" rel="stylesheet" media="print" />
+    </environment>
+    <environment names="Staging,Production">
+       <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              media="all"
+               />-->
+    </environment>
+    @*@Html.ApplicationInsightsJavaScript(TelemetryConfiguration)*@
+    
+    <!--MOJE-->
+    <script src="~/js/site.js"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Kancelaria</a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    @if (isLogged)
+                    {
+                        <li><a asp-area="" asp-controller="Cases" asp-action="Index">Sprawy</a></li>
+                        <li><a asp-area="" asp-controller="Calendar" asp-action="Index">Zadania</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+                    }
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" >
+        @RenderBody()
+    </div>
+
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    @*<environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+
+                </div>
+                <div class="col-lg-6">
+                    <h2><strong>Kontakt</strong></h2>
+                    @await Html.PartialAsync("Contact")
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+
+
+
+</html>
+
+

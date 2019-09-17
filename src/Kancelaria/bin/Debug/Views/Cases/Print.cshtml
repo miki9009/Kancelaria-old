@@ -1,0 +1,126 @@
+﻿@model Kancelaria.Models.Case
+
+<div id="print-prompt" class="resizable">
+    <div id="overlay">
+    </div>
+    <div id="div-print">
+
+        <h2>Opcje druku</h2>
+        <h3 style="margin-left:20px;"><b>Wybierz co chcesz drukować</b></h3>
+        <div style="margin-left:40px;">
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-basic" type="checkbox" class="form-check-input" value="false" checked>
+                    Podstawowe Dane
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-participants" type="checkbox" class="form-check-input" value="true" checked>
+                    Uczestnicy
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-value" type="checkbox" class="form-check-input" value="true" checked>
+                    Wartość roszczenia i wezwanie do zapłaty
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-summons" type="checkbox" class="form-check-input" value="true" checked>
+                    Pozew
+                </label>
+            </div>
+            <div class="form-check" style="margin-left:50px;">
+                <label class="form-check-label">
+                    <input id="print-claim-cases" type="checkbox" class="form-check-input" value="true" checked>
+                    Sprawy
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-judgment" type="checkbox" class="form-check-input" value="true" checked>
+                    Orzeczenie I instancji
+                </label>
+            </div>
+            <div class="form-check" style="margin-left:50px;">
+                <label class="form-check-label">
+                    <input id="print-judgment-cases" type="checkbox" class="form-check-input" value="true" checked>
+                    Sprawy
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-appeal" type="checkbox" class="form-check-input" value="true" checked>
+                    Apelacja
+                </label>
+            </div>
+            <div class="form-check" style="margin-left:50px;">
+                <label class="form-check-label">
+                    <input id="print-appeal-cases" type="checkbox" class="form-check-input" value="true" checked>
+                    Sprawy
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-cassation" type="checkbox" class="form-check-input" value="true" checked>
+                    Skarga kasacyjna
+                </label>
+            </div>
+            <div class="form-check" style="margin-left:50px;">
+                <label class="form-check-label">
+                    <input id="print-cassation-cases" type="checkbox" class="form-check-input" value="true" checked>
+                    Sprawy
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-clause" type="checkbox" class="form-check-input" value="true" checked>
+                    Postępowanie klauzulowe
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-execution" type="checkbox" class="form-check-input" value="true" checked>
+                    Postępowanie egzekcyjne
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-info" type="checkbox" class="form-check-input" value="true" checked>
+                    Informacje o sprawie
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input id="print-additional" type="checkbox" class="form-check-input" value="true" checked>
+                    Dodatkowe
+                </label>
+            </div>
+
+        </div>
+
+
+        <button onclick="printpage()"><p><b>Drukuj</b></p></button>
+        <button style="margin-top:10px;" onclick="closeContent('print-prompt')"><p><b>Anuluj</b></p></button>
+    </div>
+</div>
+
+
+<!--
+
+<script>
+    function check() {
+        var bool = document.getElementById('print-basic').checked;
+        if (document.getElementById('print-basic').checked) {
+            alert(document.getElementById('print-basic').value);
+
+        }
+
+    }
+
+</script>    
+
+-->

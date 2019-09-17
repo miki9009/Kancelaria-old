@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Kancelaria.Models.Case>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<meta charset="utf-8" />
+
+<div class="row kancelaria-div">
+    <h2 class="title-h">Sprawy</h2>
+
+    <p>
+        <div class="div-right">
+            <a asp-action="Create" class="button-kancelaria" style="padding:10px 10px 10px 10px; margin-bottom:10px">Stwórz sprawę</a>
+        </div>
+    </p>
+    <table class="table" style="border-radius:8px">
+        <thead style="background-color:black;">
+            <tr>
+                <th class="centerBlack">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="centerBlack">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+
+                <th class="centerBlack">
+                    <label>Etap</label>
+                </th>
+                <th class="centerBlack">
+                    <label>Pełnomocnik</label>
+                </th>
+                <th class="centerBlack">
+                    <label>Opcje</label>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="border-bottom:inset">
+                    <td class="center" style="font-size:120%">
+                        <b>@Html.DisplayFor(modelItem => item.Name)</b>
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+
+                    <td style="text-align:center;">
+                        @if (!item.Ended)
+                {
+                            <label style="text-align:center; color:forestgreen; ">W toku</label>
+                        }
+                        else
+                        {
+                            <label style="text-align:center; color:red; ">Zakończona</label>
+                        }
+
+                    </td>
+                    <td style="border-right:inset; text-align:center;">
+                        <label>@Html.DisplayFor(modelItem => item.Pelnomocnik)</label>
+                    </td>
+                    <td>
+                        <div style="margin-top:-10px; margin-bottom:-10px">
+                            <a asp-action="Edit" class="button-kancelaria" style="padding:10px 15px 10px 15px" asp-route-id="@item.ID">Otwórz</a>
+
+
+                            <a asp-action="Delete" class="button-kancelaria" style="padding:10px 15px 10px 15px"  asp-route-id="@item.ID">Usuń</a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

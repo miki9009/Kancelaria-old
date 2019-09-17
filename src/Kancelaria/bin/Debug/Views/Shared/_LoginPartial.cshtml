@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Kancelaria.Models
+@using Kancelaria.Models.Admin
+@using Kancelaria.Data
+
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<script>
+    function openNotifications() {
+        document.getElementById("current-notifications").style.display = "block";
+
+    }
+
+    function closeNotifications() {
+        document.getElementById("current-notifications").style.display = "none";
+    }
+
+    function goToNotifications(parameter) {
+        var url = "/Notifications/" + parameter;
+        window.location.href = url;
+    }
+</script>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            @if (Model != null && Model.GetType() == typeof(Notification))
+            {
+            <li>              
+                <a style="font-size:180%; cursor:pointer" onclick="openNotifications()">&#9993;
+                        @if (Model.currentNotifications.Count > 0)
+                        {
+                            <p id="notification-index">@Model.currentNotifications.Count</p>
+                        }
+                </a>
+
+
+                    <div id="current-notifications" class="notification-div">
+                        <div id="notifications-close" onclick="closeNotifications()">
+                            &#10006;
+                        </div>
+                        <h5>Powiadomienia
+                        </h5>
+                        @if (Model.currentNotifications.Count > 0)
+                        {
+                        <ul style="list-style:none;">
+                            @for (int i = 0; i < Model.currentNotifications.Count; i++)
+                            {
+                                <li onclick="goToNotifications('Index')">
+                                    @Model.currentNotifications[i].Title
+                                    <p>
+                                        @Model.currentNotifications[i].DateCreated
+                                    </p>
+                                </li>
+                            }
+
+                        </ul>
+                        }
+                        <a class="button-kancelaria" onclick="goToNotifications('Index')">Otwórz wiadmomości</a>
+                    </div>
+                
+            </li>
+            }
+            <li>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Wyloguj</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <!---<li><a asp-area="" asp-controller="Account" asp-action="Register">Zarejestruj</a></li>-->
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a></li>
+    </ul>
+}
